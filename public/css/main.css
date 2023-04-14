@@ -6,6 +6,17 @@
 	--bs-light-rgb:248,249,250;
 }
 
+.btn-sof-success {
+	color: #fff;
+	background-color: #0ab39c;
+	
+  }
+  .btn-sof-success:hover, .btn-sof-success:focus, .btn-sof-success:active {
+	color: #0ab39c;
+	background-color: rgba(10, 179, 156, 0.1);
+	border-color: transparent;
+  }
+
 .bg-pattern{
 	/*background-color:#dee2e6;*/
 	background-image: url(../../Assets/images/chat-bg-pattern.png);

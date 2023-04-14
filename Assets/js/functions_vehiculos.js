@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function(){
 ////////////////////////////////////////////////
 
 function cargarTipoVehiculo (){
-    let formVehiculo = document.querySelector("#formVehiculo"); //Todo el formulario
+    let formVehiculo = document.querySelector("#formVeh"); //Todo el formulario
     let tipoVeh = document.querySelector("#tveh"); //Select tipo vehiculo
 
     let request =  new XMLHttpRequest();
@@ -50,8 +50,9 @@ function cargarTipoVehiculo (){
             if(request.status == 200){
                 
               let objData = JSON.parse(this.response);
+              console.log(objData)
     
-               let template = '<option class="form-control" selected disabled>-- Seleccione --</option>'
+               let template = '<option class="form-control" selected disabled>- Select -</option>'
                 
               
                objData.forEach(tipo => {
@@ -83,7 +84,7 @@ function cargarTipoVehiculo (){
         let comboxMarca = document.querySelector("#marca"); //Select Marca
   
         let request =  new XMLHttpRequest();
-        let ajaxUrl = base_url+'/Modelos/obtenerMarcaV';
+        let ajaxUrl = base_url+'/Vehiculos/obtenerMarcaV';
         let strData = "marcaId="+idTipoVehiculo;
     
         request.open("POST",ajaxUrl,true);
@@ -95,7 +96,7 @@ function cargarTipoVehiculo (){
             if(request.status == 200){
               let objData = JSON.parse(this.response);
     
-              let template = '<option class="form-control" selected disabled>-- Seleccione --</option>'
+              let template = '<option class="form-control" selected disabled>-Select-</option>'
                 //let template = '';
                 objData.forEach(tipo => {
                         template += `<option class="form-control" value="${tipo.idMarca}">${tipo.marca}</option>`;
@@ -113,67 +114,59 @@ function cargarTipoVehiculo (){
             }   
    
         }    
-    }
+ }
 
-////////////////////////////////
+ ////////////////////////////////
  //////// COMBOX MODELO ////////
  //////////////////////////////
 
  function listar_modelos(idMarca){
     
-    let comboxModel = document.querySelector("#model"); //Select Marca  
-    
-    let request =  new XMLHttpRequest();
-    let ajaxUrl = base_url+'/Vehiculos/obtenerModelo';
-    let strData = "modeloId="+idMarca;
-    
-    request.open("POST",ajaxUrl,true);
-    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    request.send(strData); //Envio el Id
-    
-    request.onload = function (){
-            
-      if(request.status == 200){
-        let objData = JSON.parse(this.response);
-       
+  let comboxModel = document.querySelector("#modelo"); //Select Marca  
+  
+  let request =  new XMLHttpRequest();
+  let ajaxUrl = base_url+'/Vehiculos/obtenerModelo';
+  let strData = "modeloId="+idMarca;
+  console.log(strData)
+
+  
+  request.open("POST",ajaxUrl,true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.send(strData); //Envio el Id
+  
+  request.onload = function (){
+          
+    if(request.status == 200){
+        let objData = JSON.parse(this.response);  
+        console.log(objData)   
 
         let template = '<option class="form-control" selected disabled>-- Seleccione --</option>'
           //let template = '';
-          objData.forEach(tipo => {
-           
-                  template += `<option class="form-control" value="${tipo.idMarca}">${tipo.nombre}</option>`;
+          objData.forEach(tipo => {          
+                  template += `<option class="form-control" value="${tipo.idmodelo}">${tipo.nombre}</option>`;
           })        
           
-          comboxModel.innerHTML = template;
-
-         
-        
-      }   
-
-  }
-
- }
+          comboxModel.innerHTML = template;      
+      } 
+   }
+ }  
 
 //Llamo a la funcion
 cargarTipoVehiculo();
 
 
-
-
  /////////////////////////////////////////////////
- //////// MODAL MODELO: GUARDAR LOS DATOS ////////
+ //////// GUARDAR LOS DATOS VEHICULO ////////
  ////////////////////////////////////////////////
 
-    let formVehiculo = document.querySelector("#formVehiculo"); //Capturo todo el formulario
+    let formVehiculo = document.querySelector("#formVeh"); //Capturo todo el formulario
    
-    let modelo = document.querySelector("#model"); //Select modelo
-    
+    //let modelo = document.querySelector("#model"); //Select modelo    
     
     formVehiculo.onsubmit = function(e) {
         e.preventDefault();
-
-         //Recojo los datos
-         
+        
+        //Recojo los datos         
 
         //Ajax
         let request = new XMLHttpRequest();
@@ -185,11 +178,11 @@ cargarTipoVehiculo();
           
             if(request.status == 200){
               var objData = JSON.parse(request.responseText);
-              console.log(objData)
+                         
                   if(objData.status)
                   {
-                    $('#modalModelo').modal('hide');
-                    $('#table-modelos').DataTable().ajax.reload();
+                    $('#modalVehiculo').modal('hide');
+                    $('#table-vehiculos').DataTable().ajax.reload();
                     
                   
                     Swal.fire({
@@ -222,7 +215,22 @@ $('#table-vehiculos').DataTable();
 
 //*** MANDAR A LLAMAR AL MODAL: Agregar una nueva marca ***//
 function openModal(){    
-    //document.querySelector("#formRol").reset();
+  
+  document.querySelector("#idVeh").value = "";
+  document
+    .querySelector(".modal-header")
+    .classList.replace("bg-pattern-2", "bg-pattern");
+  document.querySelector("#titleModal").innerHTML = "Nuevo Vehiculo";
+  document
+    .querySelector(".modal-header")
+    .classList.replace("headerRegister", "bg-pattern-2", "headerEdit");
+  document
+    .querySelector("#btnActionForm")
+    .classList.replace("btn-info", "btn-primary");
+  document.querySelector("#btnText").innerHTML = "Guardar";
+  document.querySelector("#formVeh").reset();
+
+
 	$('#modalVehiculo').modal('show'); 
 }
 

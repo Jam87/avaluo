@@ -204,8 +204,7 @@ document.addEventListener('DOMContentLoaded', function(){
       request.onload = function (){
 
         if(request.readyState == 4 && request.status == 200){
-          var objData = JSON.parse(request.responseText);
-           
+                 
            //Convierto a un objeto el formato .JSON que recibo desde Ajax
            var objData = JSON.parse(request.responseText);
         

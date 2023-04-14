@@ -13,7 +13,7 @@
 /*----------  
 	Ruta o dominio del servidor  - Server path or domain
 ----------*/
-const BASE_URL = "http://localhost/avaluo";
+const BASE_URL = "http://localhost/avaluo/";
 
 
 /*----------  

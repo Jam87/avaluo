@@ -1,6 +1,6 @@
 <?php
 #Mando a llamar al modal
-//getModal('modalAvaluos', $data);
+getModal('modalVehiculo', $data);
 ?>
 
 <!doctype html>
@@ -43,7 +43,7 @@
                         <div class="col-lg-12">
                             <form role="form" id="formAvaluo" autocomplete="off" class="form-validate-jquery">
                                 <!--GRUPO 1:Cliente y Departamentos-->
-                                <div style="background:#F2F2F2; color:#404040;">
+                                <div>
                                     <br>
                                     <div class="form-grou mx-auto" style="width: 90%;">
                                         <div class="row">
@@ -57,14 +57,18 @@
                                                             <label for="nombre">Clientes<span class="text-danger">*</span></label>
                                                             <!-- select cliente -->
                                                             <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
-                                                                        <select class="form-select mb-3" id="sectCliente" name="sectCliente">
+                                                                <div class="col-sm-auto">
+                                                                    <div class="input-group">
+                                                                        <select class="form-select" id="sectCliente" name="sectCliente">
                                                                             <!-- cargar con js -->
                                                                         </select><!-- Fin:Tipo de veh -->
-
+                                                                        
+                                                                        <div>
+                                                                            <button class="btn btn-sof-success" onclick="deleteMultiple()"><i class="ri-add-circle-line"></i></button>                                                                          
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                             
                                                             </div>
 
                                                         </div>
@@ -111,21 +115,19 @@
 
                                                                     <!-- select tipo de equipo -->
                                                                     <div class="form-group">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-12">
-                                                                                <select class="form-control" name="selectVeh" id="selectVeh">
-                                                                                    <!-- cargar con js -->
-                                                                                </select>
-                                                                            </div>
+                                                                    <div class="col-sm-auto">
+                                                                    <div class="input-group">
+                                                                        <select class="form-select" id="selectVeh" name="selectVeh">
+                                                                            <!-- cargar con js -->
+                                                                        </select><!-- Fin:Tipo de veh -->
+                                                                        
+                                                                        <div>
+                                                                            <button class="btn btn-sof-success"  onclick="openModal();"><i class="ri-add-circle-line"></i></button>                                                                          
                                                                         </div>
                                                                     </div>
-
-                                                                    <!--Mensaje error-->
-                                                                    <p class="formulario__input-error">El usuario tiene que ser de 4
-                                                                        a
-                                                                        16
-                                                                        dígitos y solo puede contener numeros, letras y guion bajo.
-                                                                    </p>
+                                                                </div>
+                                                                    </div>
+                                                                    
                                                                 </div><!-- Fin: grupo__nombre -->
                                                             </div>
 
@@ -143,13 +145,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
-                                                                    <!--Mensaje error-->
-                                                                    <p class="formulario__input-error">El usuario tiene que ser de 4
-                                                                        a
-                                                                        16
-                                                                        dígitos y solo puede contener numeros, letras y guion bajo.
-                                                                    </p>
                                                                 </div><!-- Fin: grupo__apellido -->
                                                             </div>
                                                         </div>
@@ -1805,9 +1800,7 @@
                                                 <!--end col-->
 
                                                 <div class="modal-footer">
-                                                    <button id="btnGuardar" type="submit" class="btn btn-primary"><span id="btnText">Guardar</span></button>
-                                                    <button type="button" class="btn btn-default" id="reset" class="btn btn-link" onclick="reset();">Reset</button>
-                                                    <input type="button" value="Reset data" onClick="fun()" />
+                                                    <button id="btnGuardar" type="submit" class="btn btn-primary"><span id="btnText">Guardar</span></button>                                                    
                                                 </div>
 
                             </form>

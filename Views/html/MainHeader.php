@@ -4,21 +4,21 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="<?= base_url();?>dashboard" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="public/images/logo-sm.png" alt="" height="22">
+                            <img src="<?= base_url();?>public/images/logo-sm.png" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="public/images/logo-dark.png" alt="" height="17">
+                            <img src="<?= base_url();?>public/images/logo-dark.png" alt="" height="17">
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="<?= base_url();?>dashboard" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="public/images/logo-sm.png" alt="" height="22">
+                            <img src="<?= base_url();?>public/images/logo-sm.png" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="public/images/logo-light.png" alt="" height="17">
+                            <img src="<?= base_url();?>public/images/logo-light.png" alt="" height="17">
                         </span>
                     </a>
                 </div>
@@ -135,7 +135,7 @@
                                     <div
                                         class="text-reset notification-item d-block dropdown-item position-relative active">
                                         <div class="d-flex">
-                                            <img src="public/images/users/avatar-2.jpg"
+                                            <img src="<?= base_url();?>public/images/users/avatar-2.jpg"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link">
@@ -228,7 +228,7 @@
                                 <div data-simplebar style="max-height: 300px;" class="pe-2">
                                     <div class="text-reset notification-item d-block dropdown-item">
                                         <div class="d-flex">
-                                            <img src="public/images/users/avatar-3.jpg"
+                                            <img src="<?= base_url();?>public/images/users/avatar-3.jpg"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <a href="#!" class="stretched-link">
@@ -354,7 +354,7 @@
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="public/images/users/avatar-3.jpg"
+                            <img class="rounded-circle header-profile-user" src="<?= base_url();?>public/images/users/avatar-3.jpg"
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Juan Perez</span>

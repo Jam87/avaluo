@@ -35,8 +35,8 @@ class Vehiculos extends Controllers{
     ### OBTENER INFORMACION COMBOX TIPO VEHICULO ###
 		function obtenerTipoVehiculo(){
    
-			$arrData = $this->model->comboxTipo();			
-
+			$arrData = $this->model->comboxTipo();	
+           
 			if(is_array($arrData) == true ){				
 				
 			}
@@ -44,10 +44,9 @@ class Vehiculos extends Controllers{
 			exit();
 		  }
 
-     ### OBTENER DATA MARCA ###
+     ### OBTENER DATA COMBOX MARCA ###
      function obtenerMarcaV()
-     {
- 
+     { 
          if ($_POST) {
              $intIdTipoVehiculo = intval($_POST['marcaId']);
  
@@ -56,7 +55,21 @@ class Vehiculos extends Controllers{
              echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
          }
          die();
-     }      
+     }  
+     
+       ### OBTENER DATA COMBOX MODELOS###
+		function obtenerModelo(){
+           
+			if($_POST){
+				$intIdModelo = intval($_POST['modeloId']);
+
+				$arrData = $this->model->comboxModeloVehId($intIdModelo);
+              	
+				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+				
+			}
+			die();	
+		  }  
 
 
     ### CONTROLADOR: MOSTRAR TODOS LOS MODELOS ###
@@ -88,24 +101,32 @@ class Vehiculos extends Controllers{
         exit();
     }
 
-    ### CONTROLADOR: GUARDAR NUEVO MODELO ###
-    public function setModelo(){
+    ### CONTROLADOR: GUARDAR NUEVO VEHICULO ###
+    public function setVehiculo(){
+
+        /*dep($_POST);
+        exit();*/
 
         if($_POST){
 
-            #Capturo los datos dle modal
-            
-            $intIdModelo    = intval($_POST['idModelo']);  
-
+            #Capturo los datos dle modal            
+            $intIdVeh    = intval($_POST['idVeh']);  
+           
             $selectVehiculo = intval($_POST['tveh']);
             $selectMarca    = intval($_POST['marca']);
-            $modelo         = strClean($_POST['modelo']);          
-            $intEstado      = intval($_POST['lStatus']);
+            $modelo         = intval($_POST['modelo']); 
+            $trasmicion     = strClean($_POST['trasmicion']);
+            $tipo           = strClean($_POST['tipo']);
+            $placa          = strClean($_POST['placa']);
+            $rodamiento     = $_POST['rodamiento'];
+            $ano            = $_POST['ano'];
+            $estado         = intval($_POST['lStatus']);
+ 
 
-            if ($intIdModelo == 0) {
+            if ($intIdVeh == 0) {
                 
                 #Crear
-                $request_Modelo = $this->model->insertModelo($selectVehiculo, $selectMarca, $modelo, $intEstado);
+                $request_Veh = $this->model->insertVehiculo($selectVehiculo, $selectMarca, $modelo, $trasmicion, $tipo, $placa, $rodamiento, $ano, $estado );
                
                /* dep($request_Tipo);
                   exit();*/
@@ -113,20 +134,20 @@ class Vehiculos extends Controllers{
                 $option = 1;
             } else {
                 #Actualizar
-                $request_Modelo = $this->model->updateMarca($intIdMarca, $nomMarca, $tipoVehiculo, $intEstado);
+                $request_Veh = $this->model->updateMarca($intIdMarca, $nomMarca, $tipoVehiculo, $intEstado);
 
                 $option = 2;
             }
 
             #Verificar
-            if ($request_Modelo > 0) {
+            if ($request_Veh > 0) {
                 if ($option == 1) {
-                    $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+                    $arrResponse = array('status' => true, 'msg' => 'Vehiculo guardados correctamente.');
                 } else {
-                    $arrResponse = array('status' => true, 'msg' => 'Datos actualizados correctamente.');
+                    $arrResponse = array('status' => true, 'msg' => 'Vehiculo actualizados correctamente.');
                 }
-            } else if ($request_Modelo === 'existe') {
-                $arrResponse = array('status' => false, 'msg' => '¡Atención! El tipo de usuario ya existe.');
+            } else if ($request_Veh === 'existe') {
+                $arrResponse = array('status' => false, 'msg' => '¡Atención! El vehiculo ya existe.');
             } else {
                 $arrResponse = array('status' => true, 'msg' => 'No es posible almacenar los datos');
             }

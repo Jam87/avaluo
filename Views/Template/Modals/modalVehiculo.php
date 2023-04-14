@@ -12,15 +12,15 @@
             </div>
             <div class="modal-body">
                 <!-- TODO: Formulario de Mantenimiento -->
-                <form method="post" id="formModelo" name="formModelo">
-                    <input type="hidden" id="idModelo" name="idModelo" value="">
+                <form method="post" id="formVeh" name="formVeh">
+                    <input type="hidden" id="idVeh" name="idVeh" value="">
                     <div class="modal-body">
                         <!--GRUPO 1-->
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label for="nombre">Tipo de vehiculo <span class="text-danger">*</span></label>
-                                    <select class="form-select mb-3" id="tipo" name="tipo">
+                                    <select class="form-select mb-3" id="tveh" name="tveh">
 
                                     </select>
                                 </div><!-- Fin:Tipo de veh -->
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <label for="nombre">Trasmisión <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-border" name="modelo" id="modelo" placeholder="EJ. MECANICO">
+                                    <input type="text" class="form-border" name="trasmicion" id="trasmicion" placeholder="EJ. MECANICO">
                                 </div><!-- Fin:Tipo de veh -->
 
                                 <div class="col-sm-4">
@@ -56,7 +56,7 @@
 
                                 <div class="col-sm-4">
                                     <label for="nombre">N° de placa<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-border" name="tipo" id="tipo" placeholder="EJ. M 2611">
+                                    <input type="text" class="form-border" name="placa" id="placa" placeholder="EJ. M 2611">
                                 </div><!-- Fin:Modelo -->
                             </div>
                         </div><!-- Fin: grupo1 -->
@@ -72,7 +72,7 @@
 
                                 <div class="col-sm-4">
                                     <label for="nombre">Año <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-border" name="ano" id="ano" placeholder="EJ. 2000">
+                                    <input type="number" class="form-border" name="ano" id="ano" placeholder="EJ. 2000">
                                 </div><!-- Fin:Marca -->
 
                                 <div class="col-sm-4">
@@ -84,27 +84,6 @@
                                 </div><!-- Fin:Modelo -->
                             </div>
                         </div><!-- Fin: grupo1 -->
-
-
-                        <!--GRUPO 4-->
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="nombre">Modelo <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-border" name="modelo" id="modelo" placeholder="Ingrese un modelo">
-                                </div><!--Fin:Modelo-->
-                                <div class="col-sm-6">
-                                    <div class="formulario__grupo" id="grupo__nombre">
-                                        <label for="nombre">Estado <span class="text-danger">*</span></label>
-                                        <select class="form-select mb-3" id="lStatus" name="lStatus" required>
-                                            <option value="1">Activo</option>
-                                            <option value="2">Inactivo</option>
-                                        </select>
-                                    </div><!--Fin:Estado-->
-                                </div>
-
-                            </div>
-                        </div><!-- Fin: grupo4 -->
                                     
                        
                     </div><!-- Fin: grupo4 -->

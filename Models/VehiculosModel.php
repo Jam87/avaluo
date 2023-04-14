@@ -5,7 +5,7 @@ class VehiculosModel extends Mysql
         private $idVehiculo;
         private $trasmision;
         private $tipo;
-        private $no_placa;
+        private $noPlaca;
         private $rodamiento;
         private $ano;
         private $fecha;
@@ -47,9 +47,11 @@ public function comboxTipo(){
 
  public function comboxMarcaVehId(int $intIdTipoVehiculo){
 
-    $this->idmarca = $intIdTipoVehiculo;
+    $this->marcaId = $intIdTipoVehiculo;
    
-    $sql = "SELECT idMarca, marca FROM marca WHERE tipoId = $this->idmarca";
+    $sql = "SELECT idMarca, marca
+            FROM marca 
+            WHERE tipoId = $this->marcaId";
 
      /*INNER JOIN proveedor pr 
      ON p.proveedor = pr.codproveedor 
@@ -62,49 +64,14 @@ public function comboxTipo(){
 }
 
  /***** COMBOX:MODELO DE VEHICULO *****/
-
  public function comboxModeloVehId(int $intIdMarca){
 
-    $this->idmarca = $intIdMarca;
+    $this->modeloId = $intIdMarca;
    
 
-    $sql = "SELECT m.marca FROM marca m WHERE m.idmarca = $this->idmarca";
-    $request_marca = $this->select($sql);
-
-    
-    $marca = implode($request_marca);
-    $this->valorMarca = $marca;
- 
-
-    if($request_marca){
-        
-        $sql = "SELECT m.idMarca, t.descripcion, m.marca, md.nombre
-        FROM marca m
-        INNER JOIN tipo_vehiculo t
-        ON m.tipoId = t.id
-        INNER JOIN modelos md
-        ON md.marcaId = m.idMarca
-        WHERE m.marca = '$this->valorMarca'"; 
-
-    }
-
-
-   
-    /*$sql = "SELECT m.idMarca, t.descripcion, m.marca, md.nombre
-            FROM marca m
-            INNER JOIN tipo_vehiculo t
-            ON m.tipoId = t.id
-            INNER JOIN modelos md
-            ON md.marcaId = m.idMarca
-            WHERE m.marca = 'Hyundai'"; 
-
-    /*$sql = "SELECT idMarca, marca FROM marca WHERE tipoId = $this->idmarca";*/
-
-     /*INNER JOIN proveedor pr 
-     ON p.proveedor = pr.codproveedor 
-     WHERE p.codproducto = $id_producto";*/
-
-    //$sql = "SELECT * FROM tipo_vehiculo";   
+    $sql = "SELECT idmodelo, nombre
+            FROM modelos 
+            WHERE marcaId = $this->modeloId";
     
     $request = $this->select_all($sql);
     return $request;
@@ -171,38 +138,30 @@ public function selectMarcaId(int $idmarca){
  ***** INSERTA UN NUEVO VEHICULO *****
  */
 
- public function insertVehiculo(int $comboxTipoVehiculo, int $comboxMarca, $comboxModelo,
-                                string $trasmision, string $tipo, string $nplaca, float $rodamiento,
-                                int $ano, string $descripcion, int $intEstado){
+ public function insertVehiculo(int $selectVehiculo, int $selectMarca, int $modelo, string $trasmicion, string $tipo, string $placa, string $rodamiento, int $ano, int $estado){
               
     //Captura datos                           
-    $this->tipoId      = $comboxTipoVehiculo;
-    $this->marcaId     = $comboxMarca;
-    $this->modeloId    = $comboxModelo;  
-    $this->trasmision  = $trasmision;
+    $this->tipoId      = $selectVehiculo;
+    $this->marcaId     = $selectMarca;
+    $this->modeloId    = $modelo;
+    $this->trasmision  = $trasmicion;
     $this->tipo        = $tipo;
-    $this->no_placa    = $nplaca;
+    $this->noPlaca     = $placa;
     $this->rodamiento  = $rodamiento;
     $this->ano         = $ano;
-    $this->fecha       = DATE("Y-m-d H:i:s");
-    $this->descripcion = $descripcion;
-    $this->estado      = $intEstado; 
+    //$this->fecha       = DATE("Y-m-d H:i:s");
+    //$this->descripcion = $descripcion;
+    $this->estado      = $estado; 
 
 
      #Consulta
-     $sql ="INSERT INTO vehiculos(trasmision, tipo, no_placa, observaciones, rodamiento, año, fecha, estado, tipoId, marcaId, modeloId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+     $sql ="INSERT INTO vehiculos(tipoId, marcaId, modeloId, trasmision, tipo, noPlaca, rodamiento, ano, estado) VALUES(?,?,?,?,?,?,?,?,?)";
          
-     $arrData = array($this->trasmision, $this->tipo, $this->no_placa, $this->descripcion, $this->rodamiento, $this->ano, $this->fecha, $this->estado, $this->tipoId, $this->marcaId, $this->modeloId
-                      /*'rodamiento' => $this->rodamiento,
-                      'año'        => $this->ano, 
-                      'estado'     => $this->estado, 
-                      'tipoVehic'  => $this->tipoId, 
-                      'MarcaVeh'   => $this->marcaId*/
-                    ); 
+     $arrData = array($this->tipoId, $this->marcaId, $this->modeloId, $this->trasmision, $this->tipo, $this->noPlaca, $this->rodamiento, $this->ano, $this->estado); 
       /*echo "<pre>";                
       print_r($arrData);
       echo "</pre>"; 
-     exit();   */               
+      exit(); */              
              
      $requestInsert = $this->insert($sql,$arrData);
      return $requestInsert;                 
